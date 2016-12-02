@@ -1,0 +1,5 @@
+#!/usr/bin/env ruby
+
+require "grnbrowse/command"
+
+Grnbrowse::Command.start

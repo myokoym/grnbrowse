@@ -1,0 +1,14 @@
+%p= "「#{params[:word]}」で検索、 #{@paginated_books.n_records} 件ヒット [#{@paginated_books.start_offset}-#{@paginated_books.end_offset}件を表示]"
+- if @paginated_books.total_pages > 1
+  = paginate(@paginated_books)
+%ul
+  - @paginated_books.each do |book|
+    %li
+      %h4
+        = link_to("#{book[ENV["title_column"]]}", "/books/#{book._key || book.id}")
+      - if params["word"] && book[ENV["content_column"]]
+        %p
+          = @snippet.execute(book[ENV["content_column"]]).collect {|snippet| "...#{snippet}..."}.join(" / ").html_safe
+      %br
+- if @paginated_books.total_pages > 1
+  = paginate(@paginated_books)

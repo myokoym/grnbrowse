@@ -1,0 +1,5 @@
+%h1= @book[ENV["title_column"]]
+
+%p= simple_format(@book[ENV["content_column"]])
+
+%p= link_to("戻る", "/")

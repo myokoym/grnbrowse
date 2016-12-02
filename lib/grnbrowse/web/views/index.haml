@@ -1,0 +1,5 @@
+%p= render :_search_form, layout: false
+%br
+- if @books
+  .row
+    = render :_books, layout: false
