@@ -59,12 +59,14 @@ module Grnbrowse
         haml :index
       end
 
-      get "/books/:id_or_key" do |id_or_key|
+      get "/books/*" do
+        id_or_key = params[:splat].first
+        id_or_key.sub!(/http:\/(?!:[^\/])/, "http://")
+        id_or_key.sub!(/https:\/(?!:[^\/])/, "https://")
         database = GroongaDatabase.new
         database.open
         table = Groonga[database.table_name]
         @book = table[id_or_key]
-        puts @book.body
         haml :show
       end
 

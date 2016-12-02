@@ -5,7 +5,7 @@
   - @paginated_books.each do |book|
     %li
       %h4
-        = link_to("#{book[ENV["title_column"]]}", "/books/#{book._key || book.id}")
+        = link_to("#{book[ENV["title_column"]]}", "/books/#{URI.encode_www_form_component(book._key) || book.id}")
       - if params["word"] && book[ENV["content_column"]]
         %p
           = @snippet.execute(book[ENV["content_column"]]).collect {|snippet| "...#{snippet}..."}.join(" / ").html_safe
