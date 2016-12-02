@@ -61,6 +61,7 @@ module Grnbrowse
 
       get "/books/*" do
         id_or_key = params[:splat].first
+        # workaround
         id_or_key.sub!(/http:\/(?!:[^\/])/, "http://")
         id_or_key.sub!(/https:\/(?!:[^\/])/, "https://")
         database = GroongaDatabase.new
